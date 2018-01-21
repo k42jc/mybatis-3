@@ -28,6 +28,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
+ * 内部维护一个connection
+ * 用于运行数据库脚本
+ * 》》可以直接拿来做自己项目的工具类《《
  * @author Clinton Begin
  */
 public class ScriptRunner {

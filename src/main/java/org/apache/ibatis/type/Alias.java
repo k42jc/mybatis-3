@@ -22,6 +22,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * 用在实体对象的注解，用于注册别名
  * @author Clinton Begin
  */
 @Documented

@@ -25,6 +25,7 @@ import org.apache.ibatis.transaction.Transaction;
 import org.apache.ibatis.transaction.TransactionFactory;
 
 /**
+ * 用于创建jdbc事务管理器的工厂类
  * Creates {@link JdbcTransaction} instances.
  *
  * @author Clinton Begin

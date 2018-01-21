@@ -141,7 +141,7 @@ public class TypeAliasRegistry {
   public void registerAlias(Class<?> type) {
     String alias = type.getSimpleName();
     Alias aliasAnnotation = type.getAnnotation(Alias.class);
-    if (aliasAnnotation != null) {
+    if (aliasAnnotation != null) {// 实体类有Alias注解，使用注解内指定的字符串作为别名，否则使用实体类的简单类名
       alias = aliasAnnotation.value();
     } 
     registerAlias(alias, type);

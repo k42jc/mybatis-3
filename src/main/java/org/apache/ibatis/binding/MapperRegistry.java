@@ -27,6 +27,8 @@ import java.util.Map;
 import java.util.Set;
 
 /**
+ * 注册mapper接口
+ * 实际上是维护了一个mapper接口与MapperProxyFactory的HashMap映射
  * @author Clinton Begin
  * @author Eduardo Macarron
  * @author Lasse Voss
