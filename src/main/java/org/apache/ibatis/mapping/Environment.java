@@ -15,11 +15,12 @@
  */
 package org.apache.ibatis.mapping;
 
-import javax.sql.DataSource;
-
 import org.apache.ibatis.transaction.TransactionFactory;
 
+import javax.sql.DataSource;
+
 /**
+ * 维护事务管理器工厂与数据源的对象
  * @author Clinton Begin
  */
 public final class Environment {
@@ -42,6 +43,9 @@ public final class Environment {
     this.dataSource = dataSource;
   }
 
+  /**
+   * Environment对象构建器
+   */
   public static class Builder {
       private String id;
       private TransactionFactory transactionFactory;

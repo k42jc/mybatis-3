@@ -28,7 +28,7 @@ public final class LogFactory {
    */
   public static final String MARKER = "MYBATIS";
 
-  private static Constructor<? extends Log> logConstructor;
+  private volatile static Constructor<? extends Log> logConstructor;
 
   static {
     tryImplementation(new Runnable() {
