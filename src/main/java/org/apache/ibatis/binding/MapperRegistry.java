@@ -27,8 +27,11 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * 注册mapper接口
- * 实际上是维护了一个mapper接口与MapperProxyFactory的HashMap映射
+ * 用于注册、获取mapper接口
+ * 注册：
+ *  将接口的Class对象加入缓存(维护了一个本地HashMap<Class<?>,MapperProxyFactory>缓存)
+ * 获取:
+ *
  * @author Clinton Begin
  * @author Eduardo Macarron
  * @author Lasse Voss
@@ -43,6 +46,9 @@ public class MapperRegistry {
   }
 
   @SuppressWarnings("unchecked")
+  /**
+   * 获取mapper接口，通过jdk的动态代理创建mapper接口的实现类
+   */
   public <T> T getMapper(Class<T> type, SqlSession sqlSession) {
     final MapperProxyFactory<T> mapperProxyFactory = (MapperProxyFactory<T>) knownMappers.get(type);
     if (mapperProxyFactory == null) {
@@ -59,6 +65,14 @@ public class MapperRegistry {
     return knownMappers.containsKey(type);
   }
 
+  /**
+   * mapper注册
+   * 除了将mapper接口和MapperProxyFactory映射加入本地缓存之外
+   * 还增加了新的注解开发mapper的一系列注解解析，如：@Select等增删改查的注解以及@SelectProvider等sql语句提供器的解析还有@CacheNameSpace等缓存注解的解析
+   *
+   * @param type
+   * @param <T>
+   */
   public <T> void addMapper(Class<T> type) {
     if (type.isInterface()) {
       if (hasMapper(type)) {

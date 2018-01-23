@@ -175,6 +175,9 @@ public class MapperAnnotationBuilder {
     }
   }
 
+  /**
+   * 二级缓存@CacheNamespace注解处理
+   */
   private void parseCache() {
     CacheNamespace cacheDomain = type.getAnnotation(CacheNamespace.class);
     if (cacheDomain != null) {

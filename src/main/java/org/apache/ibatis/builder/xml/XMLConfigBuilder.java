@@ -44,12 +44,12 @@ import java.io.Reader;
 import java.util.Properties;
 
 /**
- * 通过解析mybatis-config.xml配置构建Configuration对象
+ * 通过构造器传入流对象，调用parse()将mybatis-config.xml解析为Configuration对象
  * @author Clinton Begin
  * @author Kazuki Shimizu
  */
 public class XMLConfigBuilder extends BaseBuilder {
-
+  // 限定一个当前对象只能读取一次mybatis-config.xml配置
   private boolean parsed;
   private final XPathParser parser;
   private String environment;

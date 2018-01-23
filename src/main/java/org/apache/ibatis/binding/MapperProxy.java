@@ -28,6 +28,10 @@ import org.apache.ibatis.reflection.ExceptionUtil;
 import org.apache.ibatis.session.SqlSession;
 
 /**
+ * JDK动态代理的实现
+ * 提供所有mapper接口的动态代理
+ *
+ * 当调用某一mapper方法时，实际调用本类的invoke方法，最后调用MapperMethod的execute通过sqlSession执行数据库操作
  * @author Clinton Begin
  * @author Eduardo Macarron
  */
