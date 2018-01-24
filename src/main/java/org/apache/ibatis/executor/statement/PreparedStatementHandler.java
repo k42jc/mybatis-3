@@ -32,6 +32,8 @@ import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
 
 /**
+ * 具体执行PrepareStatement查询数据库操作
+ * 结果集处理交由入参的ResultHandler处理
  * @author Clinton Begin
  */
 public class PreparedStatementHandler extends BaseStatementHandler {
