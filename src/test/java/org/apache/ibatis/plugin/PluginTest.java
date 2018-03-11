@@ -25,6 +25,14 @@ import java.util.Properties;
 
 public class PluginTest {
 
+  public static void main(String[] args) {
+    System.setProperty("jdk.proxy.ProxyGenerator.saveGeneratedFiles","true");
+    Map map = new HashMap();
+    map = (Map) new AlwaysMapPlugin().plugin(map);
+    assertEquals("Always", map.get("Anything"));
+  }
+
+
   @Test
   public void mapPluginShouldInterceptGet() {
     Map map = new HashMap();

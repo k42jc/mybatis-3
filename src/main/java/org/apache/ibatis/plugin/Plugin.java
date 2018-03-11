@@ -26,6 +26,8 @@ import java.util.Set;
 import org.apache.ibatis.reflection.ExceptionUtil;
 
 /**
+ * 插件动态代理"工具类"
+ *
  * @author Clinton Begin
  */
 public class Plugin implements InvocationHandler {
@@ -40,6 +42,12 @@ public class Plugin implements InvocationHandler {
     this.signatureMap = signatureMap;
   }
 
+  /**
+   * 使用jdk动态代理为target生成代理子类
+   * @param target 代理目标类或结果，需要实现接口
+   * @param interceptor 目标插件
+   * @return
+   */
   public static Object wrap(Object target, Interceptor interceptor) {
     Map<Class<?>, Set<Method>> signatureMap = getSignatureMap(interceptor);
     Class<?> type = target.getClass();
@@ -53,6 +61,15 @@ public class Plugin implements InvocationHandler {
     return target;
   }
 
+  /**
+   * 如果生成的代理类执行目标方法同时在@Intercept注解内存在
+   * 则执行目标插件的intercept方法
+   * @param proxy
+   * @param method
+   * @param args
+   * @return
+   * @throws Throwable
+   */
   @Override
   public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
     try {
@@ -66,6 +83,12 @@ public class Plugin implements InvocationHandler {
     }
   }
 
+  /**
+   * 获取目标插件的@Intercepts注解内的标签
+   * 在实际代理执行过程中会用到
+   * @param interceptor
+   * @return
+   */
   private static Map<Class<?>, Set<Method>> getSignatureMap(Interceptor interceptor) {
     Intercepts interceptsAnnotation = interceptor.getClass().getAnnotation(Intercepts.class);
     // issue #251
@@ -90,6 +113,12 @@ public class Plugin implements InvocationHandler {
     return signatureMap;
   }
 
+  /**
+   * 获取注解中已经存在与type接口一致的所有type的接口
+   * @param type
+   * @param signatureMap
+   * @return
+   */
   private static Class<?>[] getAllInterfaces(Class<?> type, Map<Class<?>, Set<Method>> signatureMap) {
     Set<Class<?>> interfaces = new HashSet<Class<?>>();
     while (type != null) {

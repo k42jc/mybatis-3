@@ -31,7 +31,7 @@ import java.util.Set;
  * 注册：
  *  将接口的Class对象加入缓存(维护了一个本地HashMap<Class<?>,MapperProxyFactory>缓存)
  * 获取:
- *
+ *  通过动态代理创建mapper接口的实例
  * @author Clinton Begin
  * @author Eduardo Macarron
  * @author Lasse Voss
@@ -67,7 +67,8 @@ public class MapperRegistry {
 
   /**
    * mapper注册
-   * 除了将mapper接口和MapperProxyFactory映射加入本地缓存之外
+   *
+   * 2.
    * 还增加了新的注解开发mapper的一系列注解解析，如：@Select等增删改查的注解以及@SelectProvider等sql语句提供器的解析还有@CacheNameSpace等缓存注解的解析
    *
    * @param type
@@ -80,6 +81,7 @@ public class MapperRegistry {
       }
       boolean loadCompleted = false;
       try {
+        //  1. 将接口与mapper代理工厂加入缓存
         knownMappers.put(type, new MapperProxyFactory<T>(type));
         // It's important that the type is added before the parser is run
         // otherwise the binding may automatically be attempted by the

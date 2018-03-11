@@ -121,10 +121,13 @@ public class MapperAnnotationBuilder {
   public void parse() {
     String resource = type.toString();
     if (!configuration.isResourceLoaded(resource)) {
+      // 加载解析mapper.xml配置，默认与mapper接口同名同路径
       loadXmlResource();
       configuration.addLoadedResource(resource);
       assistant.setCurrentNamespace(type.getName());
+      // 处理二级缓存
       parseCache();
+      // FIXME ??还不知道是干啥的
       parseCacheRef();
       Method[] methods = type.getMethods();
       for (Method method : methods) {
