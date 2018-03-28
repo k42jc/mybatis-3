@@ -15,12 +15,18 @@
  */
 package org.apache.ibatis.binding;
 
+import org.apache.ibatis.session.SqlSession;
+import sun.misc.ProxyGenerator;
+
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
+import java.nio.file.Files;
+import java.nio.file.OpenOption;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-
-import org.apache.ibatis.session.SqlSession;
 
 /**
  * @author Lasse Voss
@@ -44,6 +50,15 @@ public class MapperProxyFactory<T> {
 
   @SuppressWarnings("unchecked")
   protected T newInstance(MapperProxy<T> mapperProxy) {
+    try {
+      // 模拟java动态代理生成mapper接口的代理类，类名为：$mapperProxy，当前项目的com/proxy/mapper目录，与下面的代理类生成的类一模一样
+      Path path = Paths.get("com/proxy/mapper");
+      byte[] bytes = ProxyGenerator.generateProxyClass("$MapperProxy", new Class[]{mapperInterface});
+      Files.createDirectories(path);
+      Files.write(path.resolve("$MapperProxy.class"),bytes,new OpenOption[0]);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
     return (T) Proxy.newProxyInstance(mapperInterface.getClassLoader(), new Class[] { mapperInterface }, mapperProxy);
   }
 
