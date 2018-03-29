@@ -295,6 +295,12 @@ public class MapperMethod {
       this.paramNameResolver = new ParamNameResolver(configuration, method);
     }
 
+    /**
+     * 参数转换
+     * 获取mapper接口的方法的参数值(单个参数时)、将mapper接口方法的参数转换为占位符式
+     * @param args
+     * @return
+     */
     public Object convertArgsToSqlCommandParam(Object[] args) {
       return paramNameResolver.getNamedParams(args);
     }
