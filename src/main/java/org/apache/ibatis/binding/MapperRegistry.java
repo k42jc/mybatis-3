@@ -87,7 +87,7 @@ public class MapperRegistry {
         // otherwise the binding may automatically be attempted by the
         // mapper parser. If the type is already known, it won't try.
         MapperAnnotationBuilder parser = new MapperAnnotationBuilder(config, type);
-        parser.parse();
+        parser.parse();// 将关于当前mapper接口的配置 or 注解转换添加到Configuration对象
         loadCompleted = true;
       } finally {
         if (!loadCompleted) {

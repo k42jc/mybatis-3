@@ -16,14 +16,14 @@
 
 package org.apache.ibatis.reflection;
 
+import org.apache.ibatis.lang.UsesJava8;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Executable;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.apache.ibatis.lang.UsesJava8;
 
 @UsesJava8
 public class ParamNameUtil {
@@ -35,6 +35,11 @@ public class ParamNameUtil {
     return getParameterNames(constructor);
   }
 
+  /**
+   * 因为是获取接口的动态代理类的参数名，只能获取到arg0,arg1这样的参数名
+   * @param executable
+   * @return
+   */
   private static List<String> getParameterNames(Executable executable) {
     final List<String> names = new ArrayList<String>();
     final Parameter[] params = executable.getParameters();
