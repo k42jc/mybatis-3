@@ -39,6 +39,7 @@ import org.apache.ibatis.reflection.invoker.SetFieldInvoker;
 import org.apache.ibatis.reflection.property.PropertyNamer;
 
 /**
+ * 利用反射技术用于方便获取某个目标类get/set方法的"工具类"
  * This class represents a cached set of class definition information that
  * allows for easy mapping between property names and getter/setter methods.
  *

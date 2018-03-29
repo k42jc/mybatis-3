@@ -36,6 +36,14 @@ import java.lang.reflect.Type;
 import java.util.*;
 
 /**
+ * mapper接口具体方法执行封装，调用本类的execute对增删改查进行处理并返回
+ *
+ * 流程大致为：
+ *    *Mapper.selectXX(args)->MapperProxy->MapperMethod->DefaultSqlSession->*Executor.query(args)
+ *                                                                                  ⬇
+ *                                                                             Jdbc操作数据库
+ *                                                                                  ⬇
+*                                                                           *ResultHandler.handler()结果集处理
  * @author Clinton Begin
  * @author Eduardo Macarron
  * @author Lasse Voss

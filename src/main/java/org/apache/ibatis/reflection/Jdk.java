@@ -19,6 +19,7 @@ package org.apache.ibatis.reflection;
 import org.apache.ibatis.io.Resources;
 
 /**
+ * 检查当前运行环境是否存在java.lang.reflect.Parameter与java.time.Clock类
  * To check the existence of version dependent classes.
  */
 public class Jdk {

@@ -25,6 +25,10 @@ import org.apache.ibatis.session.TransactionIsolationLevel;
 import org.apache.ibatis.transaction.Transaction;
 
 /**
+ * 把具体的事务处理交给容器(如：Spring)
+ * 延迟获取数据库连接
+ * 不处理事务的提交/回滚
+ * 可以配置是否关闭连接
  * {@link Transaction} that lets the container manage the full lifecycle of the transaction.
  * Delays connection retrieval until getConnection() is called.
  * Ignores all commit or rollback requests.

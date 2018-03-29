@@ -19,6 +19,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.UndeclaredThrowableException;
 
 /**
+ * 用于获取动态代理目标类的真实异常
  * @author Clinton Begin
  */
 public class ExceptionUtil {
@@ -27,6 +28,12 @@ public class ExceptionUtil {
     // Prevent Instantiation
   }
 
+  /**
+   * 如果wrapped属于InvocationTargetException或者UndeclaredThrowableException则直接获取目标异常并返回
+   * 否则返回自己
+   * @param wrapped 被包装过的异常
+   * @return
+   */
   public static Throwable unwrapThrowable(Throwable wrapped) {
     Throwable unwrapped = wrapped;
     while (true) {
